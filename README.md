@@ -1,3 +1,3 @@
-# react-native-authentification-bj
+# react-native-authentication-bj
 
-This is example for react-native authentification by google firebase.
+This is an example for react-native authentication by google firebase.
