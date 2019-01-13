@@ -16,8 +16,6 @@ export default class LoginForm extends Component {
                     .then(this.onSuccess)    
                     .catch(this.onFail);
             });
-        this.setState({
-            error: '', loading: false });
     }
 
     onFail = () => {

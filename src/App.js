@@ -37,13 +37,18 @@ export default class App extends Component<Props> {
   }
 
   renderContent() {
+    const { spinnerStyle } = styles;
     switch (this.state.loggedIn) {
       case true:
         return (<LogOutForm onClick={this.logOutAutentification} />);
       case false:
         return (<LoginForm />);
       default:
-        return (<Spinner />);
+        return (
+          <View style={spinnerStyle}>
+            <Spinner size="large" />
+          </View>
+        );
     }
   }
 
@@ -56,3 +61,10 @@ export default class App extends Component<Props> {
     );
   }
 }
+
+const styles = {
+  spinnerStyle: {
+    marginTop: 100,
+  }
+};
+
