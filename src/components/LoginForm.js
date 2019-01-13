@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text } from 'react-native';
-import { Button, Card, CardSection, Input, Spinner } from './common';
+import { Text } from 'react-native';
 import firebase from 'firebase';
+import { Button, Card, CardSection, Input, Spinner } from './common';
 
 export default class LoginForm extends Component {
     state = { email: '', password: '', error: '', loading: false }
@@ -9,18 +9,19 @@ export default class LoginForm extends Component {
     onClick = () => {
         const { email, password } = this.state;
         this.setState({ error: '', loading: true });
-        firebase.auth().signInWithEmailAndPassword(email,password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onSuccess)
             .catch(() => {
                 firebase.auth().createUserWithEmailAndPassword(email,password)
                     .then(this.onSuccess)    
-                    .catch(this.onFail)
-            })
-        this.setState({error: '', loading: false})
+                    .catch(this.onFail);
+            });
+        this.setState({
+            error: '', loading: false });
     }
 
     onFail = () => {
-        this.setState({ error: 'Authentification failed', loading: false});
+        this.setState({ error: 'Authentification failed', loading: false });
     } 
 
     onSuccess = () => {
@@ -33,7 +34,7 @@ export default class LoginForm extends Component {
     }
 
     renderButton() {
-        if(this.state.loading) {
+        if (this.state.loading) {
             return (<Spinner size="small" />);
         }
         return (
@@ -79,4 +80,4 @@ const styles = {
         color: 'red',
         alignSelf: 'center',
     }
-}
+};

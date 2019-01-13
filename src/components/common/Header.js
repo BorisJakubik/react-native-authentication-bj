@@ -10,7 +10,7 @@ export const Header = ({ headerText }) => {
     );
 };
 
-const styles = {
+const styles = { 
     viewStyle: {
         backgroundColor: '#F8F8F8',
         justifyContent: 'center',
