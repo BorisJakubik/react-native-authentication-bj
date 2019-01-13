@@ -8,7 +8,7 @@ export default class App extends Component<Props> {
     return (
       <View>
         <Header headerText="Authentification" />
-        <Text>My app!</Text>
+        <Text>My autentification app!</Text>
       </View>
     );
   }
