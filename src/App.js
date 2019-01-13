@@ -14,12 +14,6 @@ export default class App extends Component<Props> {
   componentWillMount() {
     firebase.initializeApp({
     //   Here add data from google firebase
-    //   apiKey: 'AIzaSyBZgXyJazDGH5ok8notPV0bO-5S4IlR7AY',
-    //   authDomain: 'auth-db0d0.firebaseapp.com',
-    //   databaseURL: 'https://auth-db0d0.firebaseio.com',
-    //   projectId: 'auth-db0d0',
-    //   storageBucket: 'auth-db0d0.appspot.com',
-    //   messagingSenderId: '219866115537'
     });
 
     firebase.auth().onAuthStateChanged((user) => {
