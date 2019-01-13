@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button, Card, CardSection } from './common';
 
-export const LogOut = () => (
+const LogOutForm = ({ onClick }) => (
     <Card>
         <CardSection>
-        <Button>
+        <Button onClick={onClick}>
             Logg out
         </Button>
         </CardSection>
     </Card>
 );
+
+export default LogOutForm;

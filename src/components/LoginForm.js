@@ -12,7 +12,7 @@ export default class LoginForm extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onSuccess)
             .catch(() => {
-                firebase.auth().createUserWithEmailAndPassword(email,password)
+                firebase.auth().createUserWithEmailAndPassword(email, password)
                     .then(this.onSuccess)    
                     .catch(this.onFail);
             });
@@ -41,7 +41,7 @@ export default class LoginForm extends Component {
             <Button onClick={this.onClick}>
                 Log in
             </Button>
-        )
+        );
     }
 
     render() {

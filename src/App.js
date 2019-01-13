@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import { Header } from './components/common';
-import LoginForm from './components/LoginForm'
+import { View } from 'react-native';
 import firebase from 'firebase';
+import { Header, Spinner } from './components/common';
+import LoginForm from './components/LoginForm';
+import LogOutForm from './components/LogOutForm';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -28,26 +29,24 @@ export default class App extends Component<Props> {
         this.setState({ loggedIn: false });
       }
       console.log('what the fox said');
-    })
+    });
+  }
+
+  logOutAutentification = () => {
+    firebase.auth().signOut();
   }
 
   renderContent() {
-    swith(this.state.loggedIn) {
-      case true: 
+    switch (this.state.loggedIn) {
+      case true:
+        return (<LogOutForm onClick={this.logOutAutentification} />);
+      case false:
+        return (<LoginForm />);
+      default:
+        return (<Spinner />);
     }
-    if(this.state.loggedIn) {
-      return (
-        <Card>
-          <CardSection>
-            <Button>
-              Logg out
-            </Button>
-          </CardSection>
-        </Card>
-      );
-    } 
-    return (<LoginForm />);
   }
+
   render() {
     return (
       <View>
