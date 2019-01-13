@@ -1,10 +1,50 @@
 import React, { Component } from 'react';
-import { View, TextInput } from 'react-native';
-import { Button, Card, CardSection, Input } from './common';
+import { View, TextInput, Text } from 'react-native';
+import { Button, Card, CardSection, Input, Spinner } from './common';
+import firebase from 'firebase';
 
 export default class LoginForm extends Component {
-    state = { email: '', password: '' }
+    state = { email: '', password: '', error: '', loading: false }
+
+    onClick = () => {
+        const { email, password } = this.state;
+        this.setState({ error: '', loading: true });
+        firebase.auth().signInWithEmailAndPassword(email,password)
+            .then(this.onSuccess)
+            .catch(() => {
+                firebase.auth().createUserWithEmailAndPassword(email,password)
+                    .then(this.onSuccess)    
+                    .catch(this.onFail)
+            })
+        this.setState({error: '', loading: false})
+    }
+
+    onFail = () => {
+        this.setState({ error: 'Authentification failed', loading: false});
+    } 
+
+    onSuccess = () => {
+        this.setState({
+            email: '',
+            password: '',
+            error: '', 
+            loading: false,
+        });
+    }
+
+    renderButton() {
+        if(this.state.loading) {
+            return (<Spinner size="small" />);
+        }
+        return (
+            <Button onClick={this.onClick}>
+                Log in
+            </Button>
+        )
+    }
+
     render() {
+        const { errorStyle } = styles;
         return (
             <Card>
                 <CardSection>
@@ -23,14 +63,20 @@ export default class LoginForm extends Component {
                         placeholder="password"
                         secureTextEntry
                     /> 
-                </CardSection> 
-                <CardSection /> 
+                </CardSection>
+                <Text style={errorStyle}>{this.state.error}</Text>
                 <CardSection >
-                    <Button>
-                        Log in
-                    </Button>
+                    {this.renderButton()}
                 </CardSection> 
             </Card>
         );
+    }
+}
+
+const styles = {
+    errorStyle: {
+        fontSize: 20,
+        color: 'red',
+        alignSelf: 'center',
     }
 }
